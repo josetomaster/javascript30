@@ -1,0 +1,34 @@
+body{
+    background-color: #018DED;
+    background-image: url('https://unsplash.it/1500/1000?image=881&blur=5');
+    background-size: cover;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    height:100vh;
+  
+    margin:0;
+    box-sizing: border-box;
+}
+.clock{
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    border:15px solid white;
+    background-color: transparent;
+    outline:1px solid rgba(0,0,0,0.3);
+    display:flex;
+    position:relative;
+    align-items:center;
+}
+.tick{
+    position:absolute;
+    width:45%;
+    height:5px;
+    left:5%;
+    background-color: black;
+    transform:rotate(90deg);
+    transform-origin: right bottom;
+    transition:all 100ms;
+    transition-timing-function: cubic-bezier(0.1,2.7,0.58,1);
+}
