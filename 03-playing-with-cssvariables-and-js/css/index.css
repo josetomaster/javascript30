@@ -1,0 +1,38 @@
+:root{
+    --background-color: #fff;
+    --blur: 1;
+    --spacing:1;
+}
+body{
+    background: #193549;
+    font-family: Helvetica;
+    color:white;
+}
+h1{
+    
+    text-align:center;
+    font-size:5rem;
+   
+}
+
+.controls{
+    display:flex;
+    justify-content: center;
+    font-size:3rem;
+    gap:5px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom:2rem;
+}
+input[type="color"]{
+    width:7rem;
+}
+img{
+    position:relative;
+    display: block;
+    margin:0 auto;
+    padding-top: var(--spacing);
+    padding-left: var(--spacing);
+    background: var(--background-color);
+    filter: blur(var(--blur));
+}
