@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Type Ahead 👀</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+  <form class="search-form">
+    <input type="text" class="search" placeholder="City or State">
+    <ul class="suggestions">
+      <li>Filter for a city</li>
+      <li>or a state</li>
+    </ul>
+  </form>
+<script>
+
+
+    const cities = [];
+    const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+
+    fetch(endpoint).then(response => response.json())
+                .then(data => {
+                    cities.push(...data);
+                });
+
+    function findCitiesOrStates(cityOrState, cities){
+        return cities.filter(place => {
+            let regexp = new RegExp(cityOrState,'gi');
+
+            return place.city.match(regexp) || place.state.match(regexp);
+
+        });
+    }
+
+    
+
+
+    let searchInput = document.querySelector('.search');
+    searchInput.addEventListener('keyup', displayPlace);
+    
+    searchInput.addEventListener('change', displayPlace);
+
+    function displayPlace(){
+        let suggestionsElement = document.querySelector('.suggestions');
+       
+       let matchedCities  = findCitiesOrStates(searchInput.value,cities);
+
+       let html = matchedCities.map(place => {
+           
+           let regexp = new RegExp(searchInput.value,'gi');
+           let matchedCity = place.city.replace(regexp,`<span class="hl">${searchInput.value}</span>`); 
+           let matchedState = place.state.replace(regexp,`<span class="hl">${searchInput.value}</span>`); 
+           return `
+               <li>
+                   <span class="name">${matchedCity}, ${matchedState}</span> 
+                   <span class="population">${place.population}</span>
+               </li>
+               
+           `
+       }).join('');
+
+       suggestionsElement.innerHTML = html;
+    }
+</script>
+</body>
+</html>
